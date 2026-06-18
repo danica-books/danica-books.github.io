@@ -27,7 +27,7 @@
 
     </main>
 
-    <script src="/js/books.js"></script>
+    <script src="js/books.js"></script>
 
     <script>
       if (window.netlifyIdentity) {
@@ -35,7 +35,7 @@
           if (!user) {
             window.netlifyIdentity.on("login", () => {
               // Amikor sikeresen regisztrálsz/belépsz, átirányít az admin mappába
-              document.location.href = "/admin/";
+              document.location.href = "admin/";
             });
           }
         });
