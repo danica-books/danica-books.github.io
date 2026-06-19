@@ -2,13 +2,13 @@ backend:
   name: github
   repo: danica-books/danica-books
   branch: main
-  auth_type: implicit
-  app_id: Ov23livR0rVgO4SeyLkX
+  auth_type: pkce
+  base_url: https://decap-oauth-proxy.netlify.app
+  auth_endpoint: auth
+  cms_label_prefix: "Danica Books"
 
 media_folder: "images"
 public_folder: "/danica-books/images"
-
-publish_mode: simple
 
 collections:
   - name: "books"
@@ -17,13 +17,9 @@ collections:
     create: true
     format: "json"
     extension: "json"
-
-    slug: "{{title}}"
-    slug_encoding: "ascii"
-    slug_clean_accents: true
-
+    slug: "{{slug}}"
     fields:
-      - { label: "Cím", name: "title", widget: "string", required: true }
-      - { label: "Leírás", name: "description", widget: "text", required: true }
-      - { label: "Borító", name: "cover", widget: "image", required: true }
-      - { label: "Letöltési link", name: "download", widget: "string", required: true }
+      - { label: "Cím", name: "title", widget: "string" }
+      - { label: "Leírás", name: "description", widget: "text" }
+      - { label: "Borító", name: "cover", widget: "image" }
+      - { label: "Letöltési link", name: "download", widget: "string" }
