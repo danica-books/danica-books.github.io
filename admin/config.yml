@@ -6,7 +6,7 @@ backend:
 site_url: "https://danica-books.github.io/danica-books"
 display_url: "https://danica-books.github.io/danica-books"
 
-# A CMS-nek megmondjuk, hogy a képek GitHub Pages-en vannak
+# A CMS a GitHub Pages-ről tölti a képeket
 media_folder: "images"
 public_folder: "https://danica-books.github.io/danica-books/images"
 
@@ -20,10 +20,12 @@ collections:
     format: "json"
     extension: "json"
 
+    # Stabil, ékezetmentes slug
     slug: "{{title}}"
     slug_encoding: "ascii"
     slug_clean_accents: true
 
+    # Kötelező mezők
     fields:
       - { label: "Cím", name: "title", widget: "string", required: true }
       - { label: "Leírás", name: "description", widget: "text", required: true }
