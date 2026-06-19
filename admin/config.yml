@@ -2,22 +2,24 @@ backend:
   name: github
   repo: danica-books/danica-books
   branch: main
-  auth_type: pkce
+  auth_type: implicit
   app_id: Ov23livR0rVgO4SeyLkX
 
-media_folder: "images"
-public_folder: "/danica-books/images"
+publish_mode: editorial_workflow
+
+media_folder: "images/uploads"
+public_folder: "/danica-books/images/uploads"
 
 collections:
   - name: "books"
     label: "Könyvek"
     folder: "data/books"
     create: true
-    format: "json"
-    extension: "json"
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
       - { label: "Cím", name: "title", widget: "string" }
       - { label: "Leírás", name: "description", widget: "text" }
       - { label: "Borító", name: "cover", widget: "image" }
-      - { label: "Letöltési link", name: "download", widget: "string" }
+      - { label: "PDF", name: "download", widget: "file" }
