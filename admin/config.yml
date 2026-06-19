@@ -6,8 +6,11 @@ backend:
 site_url: "https://danica-books.github.io/danica-books"
 display_url: "https://danica-books.github.io/danica-books"
 
-media_folder: "images"
-public_folder: "images"
+# Könyvenkénti almappa a borítóknak
+media_folder: "images/books/{{slug}}"
+public_folder: "images/books/{{slug}}"
+
+publish_mode: simple   # Kikapcsolja a draft/workflow módot → nincs több ghost entry
 
 collections:
   - name: "books"
@@ -16,11 +19,15 @@ collections:
     create: true
     format: "json"
     extension: "json"
+
+    # Stabil, ékezetmentes slug
     slug: "{{title}}"
     slug_encoding: "ascii"
     slug_clean_accents: true
+
+    # Kötelező mezők → nincs több üres JSON
     fields:
-      - { label: "Cím", name: "title", widget: "string" }
-      - { label: "Leírás", name: "description", widget: "text" }
-      - { label: "Borító", name: "cover", widget: "image" }
-      - { label: "Letöltési link", name: "download", widget: "string" }
+      - { label: "Cím", name: "title", widget: "string", required: true }
+      - { label: "Leírás", name: "description", widget: "text", required: true }
+      - { label: "Borító", name: "cover", widget: "image", required: true }
+      - { label: "Letöltési link", name: "download", widget: "string", required: true }
