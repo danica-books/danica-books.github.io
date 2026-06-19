@@ -13,7 +13,7 @@ collections:
     create: true
     format: "json"
     extension: "json"
-    slug: "{{slug}}"
+    slug: "{{title}}"
     slug_encoding: "ascii"
     slug_clean_accents: true
     fields:
