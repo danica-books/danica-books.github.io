@@ -3,6 +3,9 @@ backend:
   repo: danica-books/danica-books
   branch: main
 
+site_url: "https://danica-books.github.io/danica-books"
+display_url: "https://danica-books.github.io/danica-books"
+
 media_folder: "images"
 public_folder: "images"
 
