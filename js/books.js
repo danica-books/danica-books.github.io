@@ -7,12 +7,12 @@ let currentPage = 1;
 // Könyvek betöltése
 async function loadBooks() {
     try {
-        // 1) Könyvlista betöltése (Netlify-kompatibilis)
+        // 1) Könyvlista betöltése
         const list = await fetch('data/books/index.json').then(r => r.json());
 
         // 2) Minden könyv JSON betöltése
         books = [];
-        for (const file of list) {
+        for (const file of list.books) {
             const data = await fetch(`data/books/${file}`).then(r => r.json());
             books.push(data);
         }
@@ -27,6 +27,7 @@ async function loadBooks() {
             "<p style='color:red;'>Hiba történt a könyvek betöltésekor.</p>";
     }
 }
+
 
 // Könyvek kirenderelése
 function renderBooks() {
