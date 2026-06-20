@@ -4,6 +4,9 @@ backend:
   branch: main
   auth_type: token
 
+local_backend:
+  allowed_hosts: ["danica-books.github.io"]
+
 media_folder: "images"
 public_folder: "/images"
 
