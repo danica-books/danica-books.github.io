@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Alap meta -->
     <title>Danica Milanovics – Könyvek</title>
+    <meta name="description" content="Ingyenesen letölthető könyvek, borítók és leírások egy helyen.">
+
+    <!-- Open Graph (Facebook, Messenger, WhatsApp) -->
+    <meta property="og:title" content="Danica Milanovics – Könyvek">
+    <meta property="og:description" content="Ingyenesen letölthető könyvek, borítók és leírások egy helyen.">
+    <meta property="og:image" content="https://danica-books.github.io/images/alap-borito.jpg">
+    <meta property="og:url" content="https://danica-books.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="hu_HU">
+
+    <!-- Twitter Card (X) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Danica Milanovics – Könyvek">
+    <meta name="twitter:description" content="Ingyenesen letölthető könyvek, borítók és leírások egy helyen.">
+    <meta name="twitter:image" content="https://danica-books.github.io/images/alap-borito.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
-    
+
+    <!-- Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
@@ -34,12 +58,13 @@
         window.netlifyIdentity.on("init", user => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
-              // Amikor sikeresen regisztrálsz/belépsz, átirányít az admin mappába
               document.location.href = "/admin/";
             });
           }
         });
       }
     </script>
+
 </body>
 </html>
+
