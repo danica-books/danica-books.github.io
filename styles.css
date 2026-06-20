@@ -1,6 +1,6 @@
-/* --- FONT --- */
-body {
-    font-family: 'Inter', sans-serif;
+/* --- FONT OVERRIDE (Netlify Identity felülírás ellen) --- */
+html, body {
+    font-family: 'Inter', sans-serif !important;
     background: #F7F7F7;
     margin: 0;
     padding: 0;
@@ -45,7 +45,19 @@ header {
     margin-bottom: 12px;
 }
 
-/* --- DOWNLOAD BUTTON --- */
+.book-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.book-card p {
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+    font-size: 15px;
+}
+
+/* --- DOWNLOAD BUTTON (javított classnév: download-btn) --- */
 .download-btn {
     display: inline-block;
     margin-top: 12px;
@@ -77,6 +89,7 @@ header {
     border-radius: 6px;
     font-weight: 500;
     transition: background 0.2s ease;
+    cursor: pointer;
 }
 
 .pagination button:hover:not(:disabled) {
@@ -85,4 +98,5 @@ header {
 
 .pagination button:disabled {
     background: #999;
+    cursor: default;
 }
