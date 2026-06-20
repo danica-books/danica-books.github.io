@@ -5,10 +5,8 @@ backend:
   auth_type: implicit
   app_id: Ov23livR0rVgO4SeyLkX
 
-publish_mode: editorial_workflow
-
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "books"
