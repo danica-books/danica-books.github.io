@@ -284,48 +284,5 @@
 
 </body>
 </html>
-    indexFile.books.forEach(file => {
-      const opt = document.createElement('option');
-      opt.value = file;
-      opt.textContent = file.replace('.json', '');
-      select.appendChild(opt);
-    });
-  });
-
-  function saveToken() {
-    localStorage.setItem('github_token', document.getElementById('token').value.trim());
-  }
-
-  function clearToken() {
-    localStorage.removeItem('github_token');
-    document.getElementById('token').value = '';
-    showStatus('Token törölve a böngészőből.');
-  }
-
-  function showStatus(text, isError = false) {
-    const statusDiv = document.getElementById('status');
-    statusDiv.innerText = text;
-    statusDiv.style.display = 'block';
-    statusDiv.className = isError ? 'error' : 'success';
-  }
-
-  function toBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  function slugify(text) {
-    return text.toString().toLowerCase().trim()
-      .replace(/\s+/g, '-')
-      .replace(/[áäàâã]/g, 'a')
-      .replace(/[éèêë]/g, 'e')
-      .replace(/[íìîï]/g, 'i')
-      .replace(/[óòôõöő]/g, 'o')
-      .replace(/[úùûüű]/g, 'u')
-      .replace(/[cç]/g, 'c')
       .replace(/[ñ]/g, 'n')
       .replace
