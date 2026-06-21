@@ -12,7 +12,7 @@
       padding: 20px;
     }
     .container {
-      max-width: 600px;
+      max-width: 650px;
       background: white;
       padding: 30px;
       border-radius: 8px;
@@ -133,6 +133,13 @@
   <div class="form-group">
     <label for="pdfFile">PDF fájl kiválasztása:</label>
     <input type="file" id="pdfFile" accept=".pdf" />
+    <small>10–20 MB alatt érdemes közvetlenül feltölteni. Nagyobb fájloknál használj külső linket.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="pdfUrl">Külső PDF link (opcionális):</label>
+    <input type="text" id="pdfUrl" placeholder="https://.../konyv.pdf" />
+    <small>Ha megadsz külső linket, a rendszer azt használja a fájlfeltöltés helyett.</small>
     <small id="currentPdfInfo"></small>
   </div>
 
@@ -207,7 +214,7 @@
   function showStatus(text, isError = false) {
     const statusDiv = document.getElementById('status');
     statusDiv.innerText = text;
-    statusDiv.style.display = 'block';
+    statusDiv.style.display = text ? 'block' : 'none';
     statusDiv.className = isError ? 'error' : 'success';
   }
 
@@ -241,8 +248,11 @@
   async function loadBookForEdit() {
     const select = document.getElementById('editSelect');
     const file = select.value;
+
     document.getElementById('currentCoverInfo').textContent = '';
     document.getElementById('currentPdfInfo').textContent = '';
+    document.getElementById('pdfUrl').value = '';
+
     currentBookFile = null;
     currentCoverPath = null;
     currentPdfPath = null;
@@ -270,9 +280,18 @@
         document.getElementById('currentCoverInfo').textContent =
           'Jelenlegi borító: ' + currentCoverPath + ' (nem változik, ha nem választasz új fájlt)';
       }
+
       if (currentPdfPath) {
-        document.getElementById('currentPdfInfo').textContent =
-          'Jelenlegi PDF: ' + currentPdfPath + ' (nem változik, ha nem választasz új fájlt)';
+        const pdfInfoEl = document.getElementById('currentPdfInfo');
+        const pdfUrlInput = document.getElementById('pdfUrl');
+        if (typeof currentPdfPath === 'string' &&
+            (currentPdfPath.startsWith('http://') || currentPdfPath.startsWith('https://'))) {
+          pdfUrlInput.value = currentPdfPath;
+          pdfInfoEl.textContent = 'Jelenlegi PDF (külső link): ' + currentPdfPath;
+        } else {
+          pdfInfoEl.textContent =
+            'Jelenlegi PDF: ' + currentPdfPath + ' (nem változik, ha nem választasz új fájlt vagy nem adsz meg új linket)';
+        }
       }
 
       showStatus('"' + file + '" betöltve szerkesztésre.');
@@ -335,6 +354,7 @@
     const description = document.getElementById('description').value.trim();
     const coverFileInput = document.getElementById('coverFile');
     const pdfFileInput = document.getElementById('pdfFile');
+    const pdfUrlInput = document.getElementById('pdfUrl');
 
     if (!title) {
       showStatus('A cím mező kötelező.', true);
@@ -364,8 +384,22 @@
         coverPath = await uploadFile(coverTargetPath, coverFile, token);
       }
 
-      if (pdfFileInput.files && pdfFileInput.files[0]) {
+      const externalPdfUrl = pdfUrlInput.value.trim();
+
+      if (externalPdfUrl) {
+        pdfPath = externalPdfUrl;
+      } else if (pdfFileInput.files && pdfFileInput.files[0]) {
         const pdfFile = pdfFileInput.files[0];
+        const maxSize = 20 * 1024 * 1024; // ~20 MB, biztonságos REST API limit alatt
+        if (pdfFile.size > maxSize) {
+          const mb = Math.round(pdfFile.size / 1024 / 1024);
+          showStatus(
+            'A PDF túl nagy a közvetlen feltöltéshez (' + mb +
+            ' MB). Kérlek adj meg külső PDF linket a "Külső PDF link" mezőben.',
+            true
+          );
+          return;
+        }
         const pdfTargetPath = `pdf/${baseSlug}.pdf`;
         pdfPath = await uploadFile(pdfTargetPath, pdfFile, token);
       }
