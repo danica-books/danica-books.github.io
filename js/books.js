@@ -43,7 +43,16 @@ function renderBooks() {
             <img src="${book.cover}" alt="${book.title}">
             <h3>${book.title}</h3>
             <p class="book-description">${book.description}</p>
-            <a href="${book.download}" class="download-btn" target="_blank">Letöltés (PDF)</a>
+
+            <a href="${book.download}" class="download-btn" target="_blank">
+                Letöltés (PDF)
+            </a>
+
+            ${book.attachment ? `
+                <a href="${book.attachment.file}" class="download-btn" target="_blank">
+                    ${book.attachment.title}
+                </a>
+            ` : ""}
         `;
 
         container.appendChild(div);
