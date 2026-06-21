@@ -57,6 +57,11 @@ header {
     font-size: 15px;
 }
 
+/* --- LEÍRÁS TÖRDELÉS JAVÍTÁSA --- */
+.book-description {
+    white-space: pre-line;
+}
+
 /* --- DOWNLOAD BUTTON (javított classnév: download-btn) --- */
 .download-btn {
     display: inline-block;
