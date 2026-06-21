@@ -13,15 +13,18 @@
       padding: 20px;
       color: #2c3e50;
       line-height: 1.6;
+      overflow-x: hidden; /* Megakadályozza a túllógást */
     }
 
     .container {
       max-width: 900px;
+      width: 100%;
       margin: 0 auto;
       background: white;
-      padding: 40px;
+      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      box-sizing: border-box; /* Padding ne növelje túl a szélességet */
     }
 
     h1 {
@@ -38,7 +41,7 @@
 
     img.cover {
       max-width: 100%;
-      width: 350px;
+      width: min(350px, 90vw); /* Soha nem lóg túl */
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
@@ -47,6 +50,11 @@
       font-size: 1.1rem;
       margin: 20px 0 30px;
       white-space: pre-line;
+    }
+
+    .downloads {
+      text-align: center;
+      margin-top: 20px;
     }
 
     .btn {
@@ -76,11 +84,6 @@
 
     .back:hover {
       color: #000;
-    }
-
-    .downloads {
-      text-align: center;
-      margin-top: 20px;
     }
   </style>
 </head>
