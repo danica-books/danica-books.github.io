@@ -6,6 +6,7 @@
   <title>Könyv – Danica Milánovics</title>
 
   <style>
+    /* Teljes oldal: középre igazítva, görgetés nélkül */
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       background: #eef1f5;
@@ -13,75 +14,82 @@
       padding: 0;
       color: #2c3e50;
       line-height: 1.6;
-      overflow-x: hidden;
-
-      /* 🔥 A teljes oldal középre igazítása */
+      overflow: hidden; /* 🔥 NINCS GÖRGETÉS */
+      height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
+      align-items: center;
     }
 
-    /* 🔥 Minden kép biztonságosan méretezve */
+    /* Minden kép biztonságosan méretezve */
     img {
       max-width: 100%;
       height: auto;
       display: block;
     }
 
+    /* A tartalom egyetlen képernyőn belül */
     .container {
-      width: 100%;
-      max-width: 900px;
+      width: 90vw;
+      max-width: 800px;
+      max-height: 90vh; /* 🔥 Soha nem nőhet túl a képernyőn */
       background: white;
       padding: 20px;
-      margin: 20px;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
       box-sizing: border-box;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 🔥 Minden elfér egy képernyőn */
+      overflow: hidden;
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 2rem;
-      color: #1a2530;
+      margin: 0;
+      font-size: 1.6rem;
       text-align: center;
+      color: #1a2530;
     }
 
     .cover-wrapper {
       text-align: center;
-      margin: 20px 0;
+      margin: 10px 0;
+      flex-shrink: 0;
     }
 
     img.cover {
-      width: min(350px, 90vw);
+      width: min(240px, 60vw); /* 🔥 Kisebb borító, hogy minden elférjen */
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin: 0 auto;
     }
 
     .description {
-      font-size: 1.1rem;
-      margin: 20px 0 30px;
+      font-size: 1rem;
+      margin: 10px 0;
       white-space: pre-line;
-
-      /* 🔥 Hosszú sorok törése */
       word-wrap: break-word;
       overflow-wrap: break-word;
+      flex-grow: 1;
+      overflow-y: auto; /* 🔥 Csak a szöveg görgethető, az oldal nem */
     }
 
     .downloads {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 10px;
+      flex-shrink: 0;
     }
 
     .btn {
       display: inline-block;
       background: #3498db;
       color: white;
-      padding: 14px 22px;
+      padding: 10px 16px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      margin: 10px 0;
+      margin: 5px 0;
       transition: 0.2s;
     }
 
@@ -90,12 +98,13 @@
     }
 
     .back {
-      display: inline-block;
-      margin-top: 40px;
+      display: block;
+      text-align: center;
+      margin-top: 10px;
       color: #555;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .back:hover {
@@ -114,7 +123,7 @@
 
   <p id="description" class="description"></p>
 
-  <div id="downloads" class="downloads"></div>
+  <div class="downloads" id="downloads"></div>
 
   <a href="index.html" class="back">← Vissza a könyvekhez</a>
 </div>
